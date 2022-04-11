@@ -4224,7 +4224,6 @@ static int process_input(int file_index)
     int ret, thread_ret, i, j;
     int64_t duration;
     int64_t pkt_dts;
-    int disable_discontinuity_correction = copy_ts;
 
     is  = ifile->ctx;
     ret = get_input_packet(ifile, &pkt);
@@ -4439,7 +4438,7 @@ static int process_input(int file_index)
                                             ist->st->time_base, AV_TIME_BASE_Q,
                                             AV_ROUND_NEAR_INF|AV_ROUND_PASS_MINMAX);
         if (FFABS(wrap_dts - ist->next_dts) < FFABS(pkt_dts - ist->next_dts)/10)
-            disable_discontinuity_correction = 0;
+            force_dts_monotonicity = 0;
     }
 
     if ((ist->dec_ctx->codec_type == AVMEDIA_TYPE_VIDEO ||
