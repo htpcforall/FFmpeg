@@ -2361,8 +2361,6 @@ static int hls_read_packet(AVFormatContext *s, AVPacket *pkt)
                 return ret;
             }
         }
-        pkt->dts = AV_NOPTS_VALUE;
-        pkt->pts = AV_NOPTS_VALUE;
 
         return 0;
     }
